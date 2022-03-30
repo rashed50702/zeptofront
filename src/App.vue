@@ -71,7 +71,7 @@
 
   const navigation = [
     { name: 'Dashboard', href: '/', current: true },
-    { name: 'About', href: '/about', current: false },
+    { name: 'Login', href: '/login', current: false },
   ]
 
   export default {
