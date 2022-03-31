@@ -4,6 +4,7 @@ import RegistrationView from '../views/RegistrationView.vue'
 import ForgotPasswordView from '../views/ForgotPasswordView.vue'
 import ProductDetailView from '../views/ProductDetailView.vue'
 import ProductsView from '../views/ProductsView.vue'
+import ProductCreate from '../views/ProductCreate.vue'
 
 const routes = [
   {
@@ -38,6 +39,11 @@ const routes = [
     path: '/products',
     name: 'products',
     component: ProductsView
+  },
+  {
+    path: '/product-create',
+    name: 'product-create',
+    component: ProductCreate
   }
 ]
 
