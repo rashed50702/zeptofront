@@ -34,13 +34,13 @@
                         </div>
                       </td>
                       <td class="text-center">
-                        <button type="button" class="inline-flex items-center p-1.5 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-1" title="Edit">
+                        <router-link :to="'/products/'+product.id+'/edit'" class="inline-flex items-center p-1.5 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 m-1" title="Edit">
                          <span class="inline-flex items-center justify-center text-xs font-semibold text-white-800 rounded-full">
                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                              <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                            </svg>
                          </span>
-                        </button>
+                        </router-link>
 
                         <button type="button" class="inline-flex items-center p-1.5 text-xs font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 m-1" title="View">
                          <span class="inline-flex items-center justify-center text-xs font-semibold text-white-800 rounded-full">
@@ -51,7 +51,7 @@
                          </span>
                         </button>
 
-                        <button type="button" class="inline-flex items-center p-1.5 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 m-1" title="Delete">
+                        <button type="button" class="inline-flex items-center p-1.5 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 m-1" title="Delete" @click="handleDelete(product.id)">
                          <span class="inline-flex items-center justify-center text-xs font-semibold text-white-800 rounded-full">
                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                              <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -88,26 +88,18 @@
           console.log(response);
         });
 
+      },
+
+      handleDelete(id){
+        if(confirm("Do you really want to delete?")){
+          axios.delete('products/'+id);
+          alert("Deleted successfully");
+          this.getProducts();
+        }
       }
     }
-      }
+  }
 </script>
 <style>
-/*  @media (min-width: 640px) {
-      table {
-        display: inline-table !important;
-      }
 
-      thead tr:not(:first-child) {
-        display: none;
-      }
-    }
-
-    td:not(:last-child) {
-      border-bottom: 0;
-    }
-
-    th:not(:last-child) {
-      border-bottom: 2px solid rgba(0, 0, 0, .1);
-    }*/
 </style>

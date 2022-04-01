@@ -5,6 +5,7 @@ import ForgotPasswordView from '../views/ForgotPasswordView.vue'
 import ProductDetailView from '../views/ProductDetailView.vue'
 import ProductsView from '../views/ProductsView.vue'
 import ProductCreate from '../views/ProductCreate.vue'
+import ProductEdit from '../views/ProductEdit.vue'
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
     path: '/product-create',
     name: 'product-create',
     component: ProductCreate
+  },
+  {
+    path: '/products/:id/edit',
+    name: 'ProductEdit',
+    component: ProductEdit,
   }
 ]
 

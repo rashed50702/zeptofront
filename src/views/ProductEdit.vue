@@ -2,7 +2,7 @@
   <div class="p-3">
     <div class="flex justify-between">
       <div>
-        <h4>Add New Product</h4>
+        <h4>Edit Product</h4>
       </div>
       <div>
         <router-link to='/products'>Product List</router-link>
@@ -42,12 +42,17 @@
   export default {
     data(){
       return{
+        id: this.$route.params.id,
         product:{
           name: '',
           price: '',
           image: null
         }
       }
+    },
+    async created(){
+      const response = await axios.get('products/' + this.id);
+      this.product = response.data;
     },
     methods:{
       productImage(event){
@@ -59,17 +64,14 @@
         productData.append('name', this.product.name);
         productData.append('price', this.product.price);
         productData.append('image', this.product.image);
-
+        productData.append('_method', 'PUT');
 
         // await axios.post('products', productData).then((response) => {
         //   console.log(response);
         // });
-        await axios.post('products', productData)
+        await axios.post('products/' + this.id, productData)
           .then((response) => {
-            this.product.name = "";
-            this.product.price = "";
-            this.product.image = "";
-            alert("Saved Successfully!");
+            alert("Updated Successfully!");
             // this.toast.success("done");
             console.log(response);
         });
