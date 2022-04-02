@@ -6,7 +6,7 @@
           <div class="..."><h2 class="text-2xl font-extrabold tracking-tight text-gray-900">Featured Products</h2></div>
           <div class="...">
             <input
-              type="search"
+              type="text"
               class="
                 form-control
                 block
@@ -24,8 +24,8 @@
                 m-0
                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
               "
-              id="exampleSearch"
               placeholder="Search Product By Name"
+              v-model="search"
             />
           </div>
           <div class="...">
@@ -43,15 +43,15 @@
                   transition
                   ease-in-out
                   m-0
-                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                    <option selected>Highest To Lowest</option>
-                    <option value="1">Lowest To Highest</option>
+                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example" v-model="sortBy">
+                    <option value="highesttolowest" selected>Highest To Lowest</option>
+                    <option value="lowesttohighest">Lowest To Highest</option>
                 </select>
           </div>
         </div>
         
         <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          <div v-for="product in products" :key="product.id" class="group relative border-solid border-2 border-indigo-100">
+          <div v-for="product in filteredProducts" :key="product.id" class="group relative border-solid border-2 border-indigo-100">
             <div class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
               <img :src="image_src+'/products/'+product.image" class="w-full h-full object-center object-cover lg:w-full lg:h-full" />
             </div>
@@ -81,12 +81,28 @@ import axios from 'axios';
 export default {
   data(){
     return{
-      products: []
+      products: [],
+      search: '',
+      sortBy: 'highesttolowest'
     }
   },
 
   created(){
     this.loadProducts();
+  },
+
+  computed:{
+    filteredProducts(){
+      return this.products.filter((prod) =>{
+        return prod.name.toLowerCase().match(this.search.toLowerCase())
+      }).sort((a, b) =>{
+        if (this.sortBy =='highesttolowest'){
+          return b.price-a.price;
+        }else if (this.sortBy =='lowesttohighest'){
+          return a.price-b.price;
+        }
+      });
+    }
   },
 
   methods:{

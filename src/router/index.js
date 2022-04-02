@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import RegistrationView from '../views/RegistrationView.vue'
 import ForgotPasswordView from '../views/ForgotPasswordView.vue'
 import ProductDetailView from '../views/ProductDetailView.vue'
+import DashboardView from '../views/DashboardView.vue'
 import ProductsView from '../views/ProductsView.vue'
 import ProductCreate from '../views/ProductCreate.vue'
 import ProductEdit from '../views/ProductEdit.vue'
@@ -30,6 +31,11 @@ const routes = [
     path: '/forgot-password',
     name: 'forgot-password',
     component: ForgotPasswordView
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: DashboardView
   },
   {
     path: '/product-detail',
